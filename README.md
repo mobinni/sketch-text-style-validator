@@ -2,7 +2,7 @@
 A plugin to count the number of occurences each text style you define has, that way you can consistently apply textstyles.
 
 # Screenshot
-![](http://imgur.com/rbW2zLM)
+![](http://i.imgur.com/rbW2zLM.png)
 
 # Installation
 Get from sketch plugin store or get this repo and double click the ".sketchplugin" file.
