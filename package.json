@@ -1,0 +1,15 @@
+{
+  "name": "Text Style Validator",
+  "version": "1.0.0",
+  "description": "A plugin to count the number of occurences each text style you define has, that way you can consistently apply textstyles",
+  "license": "MIT",
+  "author": {
+    "name": "Mo Binni",
+    "email": "mo.binni@hotmail.com"
+  },
+  "scripts": {
+    "manifest:update": "node ./tasks/manifest-update.js",
+    "plugin:install": "node ./tasks/plugin-install.js"
+  },
+  "private": true
+}

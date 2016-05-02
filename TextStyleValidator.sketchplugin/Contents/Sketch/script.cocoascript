@@ -1,0 +1,75 @@
+var onRun = function(context) {
+  var documentName = context.document.displayName();
+  log('Current document: ' + documentName);
+  var alert = NSAlert.alloc().init();
+  var document = context.document;
+  // Get all relevant text layers
+  var allTextLayers = processLayers(document);
+
+  // Loop over all layer styles and count occurrences
+  var message = processTextLayers(document, allTextLayers);
+
+  alert.setMessageText(message);
+  alert.addButtonWithTitle('OK');
+  alert.runModal();
+}
+// Function that collects all text layers in all pages
+function processLayers(document) {
+  var pages = document.pages().objectEnumerator();
+  var allLayers = [];
+  while(page = pages.nextObject()) {
+    var layers = [page children];
+    var length = [layers count];
+      while (length--) {
+        if(layers.objectAtIndex(length).superclass() == "_MSTextLayer") {
+          var layer = [layers objectAtIndex: length];
+          allLayers.push(layer);
+      }
+    }
+  }
+  return allLayers;
+}
+
+function processTextLayers(document, allLayers) {
+     var styles = '';
+     // Get all text layers
+     var textLayers = document.documentData().layerTextStyles().objectsGeneric();
+     // loop over the text layers
+     for(var i = 0; i < textLayers.length(); i++) {
+      // keep an occurrences counter per layer
+       var occurrences = 0;
+       // get the current layer
+       var textLayer = textLayers.objectAtIndex(i);
+       // get the layer name
+       var style = textLayer.name();
+       // loop over all collected textlayers
+       for(var j = 0; j < allLayers.length; j++) {
+        // get current text layer
+         var layer = allLayers[j];
+         // get layer style
+         if(layer.documentData() && layer.style) {
+            // layer data
+             var dd = layer.documentData();
+             // check if layer data has textStyles
+             if(dd.layerTextStyles()) {
+              // lts = layer text style
+               var lts = dd.layerTextStyles();
+               // get layer style instance
+               var sofi = lts.sharedObjectForInstance(layer.style());
+               // style name var
+               var styleName = '';
+               // check if sofi is defined
+               if(sofi) styleName = sofi.name();
+               // check if style name
+               if(styleName == style) {
+                // add occurence of text style
+                 occurrences++;
+               }
+             }
+           }
+       }
+    log(style + ' ' + occurrences);
+    styles += 'Text Style: ' + style + '\t\n\t occurrences: ' + occurrences + '\n';
+  }
+  return styles;
+}

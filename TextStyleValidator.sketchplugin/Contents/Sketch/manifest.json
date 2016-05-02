@@ -1,0 +1,23 @@
+{
+  "author" : "Mo Binni",
+  "commands" : [
+    {
+      "shortcut": "cmd alt 4",
+      "script" : "script.cocoascript",
+      "handler" : "onRun",
+      "name" : "Text Style Validator",
+      "identifier" : "textstylevalidator"
+    }
+  ],
+  "menu" : {
+    "isRoot": true,
+    "items" : [
+      "textstylevalidator"
+    ]
+  },
+  "identifier" : "com.mobinni.sketch.textstylevalidator",
+  "version" : "0.0.1",
+  "description" : "A plugin to count the number of occurences each text style you define has, that way you can consistently apply textstyles",
+  "authorEmail" : "mo.binni@hotmail.com",
+  "name" : "Text Style Validator"
+}
